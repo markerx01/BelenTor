@@ -275,7 +275,7 @@ function PhotoGallery() {
   const photos = Array.from({ length: 12 }, (_, i) => ({
     id: i + 1,
     caption: [
-      'רגע ראשון 🌹',
+      'רגע מיוחד 🌹',
       'חיוך שלך ✨',
       'יחד תמיד 💕',
       'אהבה שלנו 💗',
