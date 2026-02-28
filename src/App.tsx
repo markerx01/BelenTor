@@ -272,36 +272,25 @@ function LoveLetter() {
 function PhotoGallery() {
   const [lightbox, setLightbox] = useState<number | null>(null);
 
+  const captions = [
+    'רגע ראשון 🌹',
+    'חיוך שלך ✨',
+    'יחד תמיד 💕',
+    'אהבה שלנו 💗',
+    'זכרון מתוק 🍯',
+    'יום מושלם ☀️',
+    'חיבוק חם 🤗',
+    'עיניים יפות 👀',
+    'צוחקים ביחד 😂',
+    'הלב שלי 💖',
+    'אנחנו 🥰',
+    'לנצח שלנו 💞',
+  ];
+
   const photos = Array.from({ length: 12 }, (_, i) => ({
     id: i + 1,
-    caption: [
-      'רגע מיוחד 🌹',
-      'חיוך שלך ✨',
-      'יחד תמיד 💕',
-      'אהבה שלנו 💗',
-      'זכרון מתוק 🍯',
-      'יום מושלם ☀️',
-      'חיבוק חם 🤗',
-      'עיניים יפות 👀',
-      'צוחקים ביחד 😂',
-      'הלב שלי 💖',
-      'אנחנו 🥰',
-      'לנצח שלנו 💞',
-    ][i],
-    gradient: [
-      'from-rose-900/60 to-pink-800/40',
-      'from-pink-900/60 to-rose-800/40',
-      'from-red-900/50 to-pink-900/40',
-      'from-rose-800/50 to-red-900/40',
-      'from-pink-800/50 to-rose-900/40',
-      'from-rose-900/40 to-pink-800/50',
-      'from-red-900/40 to-rose-800/50',
-      'from-pink-900/40 to-red-900/50',
-      'from-rose-800/40 to-pink-900/50',
-      'from-red-800/40 to-rose-900/50',
-      'from-pink-800/40 to-rose-800/50',
-      'from-rose-900/50 to-red-800/40',
-    ][i],
+    src: `/photos/${i + 1}.jpg`,
+    caption: captions[i],
   }));
 
   return (
@@ -320,10 +309,11 @@ function PhotoGallery() {
               className="photo-card rounded-2xl overflow-hidden cursor-pointer group relative aspect-square"
               onClick={() => setLightbox(photo.id)}
             >
-              {/* Placeholder gradient — replace with <img> */}
-              <div className={`w-full h-full bg-gradient-to-br ${photo.gradient} flex items-center justify-center`}>
-                <span className="text-pink-300/20 text-5xl">🌹</span>
-              </div>
+              <img
+                src={photo.src}
+                alt={photo.caption}
+                className="w-full h-full object-cover"
+              />
 
               {/* Hover overlay with caption */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent
@@ -344,10 +334,11 @@ function PhotoGallery() {
           onClick={() => setLightbox(null)}
         >
           <div className="relative max-w-3xl w-full">
-            <div className={`aspect-square rounded-3xl bg-gradient-to-br ${photos[lightbox - 1].gradient}
-                            flex items-center justify-center`}>
-              <span className="text-pink-300/20 text-8xl">🌹</span>
-            </div>
+            <img
+              src={photos[lightbox - 1].src}
+              alt={photos[lightbox - 1].caption}
+              className="w-full rounded-3xl object-contain max-h-[80vh]"
+            />
             <p className="text-center text-pink-200/70 mt-4 text-lg">{photos[lightbox - 1].caption}</p>
             <button
               className="absolute -top-3 -left-3 w-10 h-10 rounded-full bg-pink-900/50 border border-pink-400/20
